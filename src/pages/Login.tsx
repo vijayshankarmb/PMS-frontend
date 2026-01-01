@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
 import { useAuth } from '../auth/useAuth'
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {      
       e.preventDefault();
       await login(email, password);
-      navigate('/dashboard');
     } catch (error: string | unknown) {
       setError(error as string);
     }
