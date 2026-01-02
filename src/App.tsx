@@ -15,6 +15,8 @@ import AdminProjects from './pages/admin/Projects';
 import AdminUsers from './pages/admin/Users';
 import AdminTasks from './pages/admin/Tasks';
 
+import UserTasks from './pages/user/Tasks';
+
 const App = () => {
   const { user, loading } = useAuth();
   console.log("Auth state", user, loading);
@@ -43,6 +45,7 @@ const App = () => {
 
       <Route path="/user" element={<UserLayout />}>
         <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="tasks" element={<UserTasks />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" />} />

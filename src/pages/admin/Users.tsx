@@ -16,7 +16,8 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
         try {
             const data = await getUsers();
-            setUsers(data);
+            const filteredData = data.filter((user: User) => user.role !== "admin");
+            setUsers(filteredData);
         } catch (error: unknown) {
             setError(error as string);
         } finally {

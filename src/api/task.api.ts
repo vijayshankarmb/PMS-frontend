@@ -12,3 +12,27 @@ export const createTask = async ({taskName, taskDescription, projectId, assigned
         throw "Something went wrong";
     }
 }
+
+export const getTasks = async () => {
+    try {
+        const res = await api.get("/tasks");
+        return res.data.data;
+    } catch (error: unknown) {
+        if(axios.isAxiosError(error)){
+            throw error.response?.data?.message || "Request failed";
+        }
+        throw "Something went wrong";
+    }
+}
+
+export const updateTaskStatus = async (id: string, status: string) => {
+    try {
+        const res = await api.put(`/tasks/status/${id}`, {status});
+        return res.data.data;
+    } catch (error: unknown) {
+        if(axios.isAxiosError(error)){
+            throw error.response?.data?.message || "Request failed";
+        }
+        throw "Something went wrong";
+    }
+}
