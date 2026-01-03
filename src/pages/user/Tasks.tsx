@@ -21,7 +21,6 @@ const UserTasks = () => {
   const [searchParams] = useSearchParams();
   const statusFilter = searchParams.get("status");
 
-  // Fetch tasks (backend returns only assigned tasks for user)
   const fetchTasks = async () => {
     try {
       const data = await getTasks();
@@ -37,14 +36,12 @@ const UserTasks = () => {
     fetchTasks();
   }, []);
 
-  // Enforce correct task status flow
   const getNextStatus = (status: Task["status"]) => {
     if (status === "pending") return "in-progress";
     if (status === "in-progress") return "completed";
     return null;
   };
 
-  // Filter tasks by URL status
   const filteredTasks = statusFilter
     ? tasks.filter((task) => task.status === statusFilter)
     : tasks;
@@ -66,11 +63,6 @@ const UserTasks = () => {
         return (
           <div
             key={task._id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
           >
             <h3>{task.taskName}</h3>
             <p>{task.taskDescription}</p>

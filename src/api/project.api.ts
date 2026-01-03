@@ -24,3 +24,27 @@ export const createProject = async ({projectName, projectDescription}: {projectN
         throw "Something went wrong";
     }
 }
+
+export const updateProject = async ({id, projectName, projectDescription}: {id: string, projectName: string, projectDescription: string})=> {
+    try {
+        const res = await api.put(`/projects/${id}`, {projectName, projectDescription});
+        return res.data.data;
+    } catch (error) {
+        if(axios.isAxiosError(error)){
+            throw error.response?.data?.message || "Request failed";
+        }
+        throw "Something went wrong";
+    }
+}
+
+export const deleteProject = async (id: string)=> {
+    try {
+        const res = await api.delete(`/projects/${id}`);
+        return res.data.data;
+    } catch (error) {
+        if(axios.isAxiosError(error)){
+            throw error.response?.data?.message || "Request failed";
+        }
+        throw "Something went wrong";
+    }
+}

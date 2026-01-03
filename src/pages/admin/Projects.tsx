@@ -1,4 +1,4 @@
-import { getProjects, createProject } from "../../api/project.api";
+import { getProjects, createProject, updateProject, deleteProject } from "../../api/project.api";
 import { useState, useEffect } from "react";
 
 interface Project {
@@ -16,6 +16,7 @@ const AdminProjects = () => {
     const [projectName, setProjectName] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
     const [creatingProject, setCreatingProject] = useState(false);
+    const [editingProject, setEditingProject] = useState<Project | null>(null);
 
     const fetchProjects = async () => {
         try {
@@ -33,7 +34,16 @@ const AdminProjects = () => {
         try {
             setError(null);
             setCreatingProject(true);
-            await createProject({ projectName, projectDescription });
+            if (editingProject){
+                await updateProject({
+                    id: editingProject._id,
+                    projectName,
+                    projectDescription,
+                });
+                setEditingProject(null);
+            } else {
+                await createProject({ projectName, projectDescription });
+            }
             fetchProjects();
             setProjectName('');
             setProjectDescription('');
@@ -47,6 +57,24 @@ const AdminProjects = () => {
     useEffect(() => {
         fetchProjects();
     }, [])
+
+    const handleEdit = async (project: Project)=> {
+        setProjectName(project.projectName);
+        setProjectDescription(project.projectDescription);
+        setEditingProject(project);
+    }
+
+    const handleDelete = async (id: string) => {
+        try {
+            if (confirm("Are you sure? This will delete all tasks in this project.")) {
+                setError(null);
+                await deleteProject(id);
+                fetchProjects();
+            }
+        } catch (error: unknown) {
+            setError(error as string);
+        }
+    }
 
     if (loading) {
         return <p>Loading projects...</p>
@@ -76,7 +104,7 @@ const AdminProjects = () => {
                         placeholder="Enter Description"
                         value={projectDescription}
                         onChange={(e) => setProjectDescription(e.target.value)} />
-                    <button type="submit">Submit</button>
+                    <button type="submit"> {editingProject ? 'Update' : 'Create'} </button>
                 </form>
             </div>
             <div>
@@ -85,6 +113,8 @@ const AdminProjects = () => {
                     <div key={project._id}>
                         <h1>{project.projectName}</h1>
                         <p>{project.projectDescription}</p>
+                        <button onClick={() => handleDelete(project._id)}>Delete</button>
+                        <button onClick={() => handleEdit(project)}>Edit</button>
                     </div>
                 ))}
             </div>

@@ -23,10 +23,10 @@ const Sidebar = () => {
             user.role === "user" && (
                 <ul>
                     <li> <Link to="/user/dashboard"> Dashboard </Link> </li>
-                    <li> <Link to="/user/task"> My Tasks </Link> </li>
-                    <li> <Link to="/user/task?status=pending"> Pending </Link> </li>
-                    <li> <Link to="/user/task?status=in-progress"> In-Progress </Link> </li>
-                    <li> <Link to="/user/task?status=completed"> Completed </Link> </li>
+                    <li> <Link to="/user/tasks"> My Tasks </Link> </li>
+                    <li> <Link to="/user/tasks?status=pending"> Pending </Link> </li>
+                    <li> <Link to="/user/tasks?status=in-progress"> In-Progress </Link> </li>
+                    <li> <Link to="/user/tasks?status=completed"> Completed </Link> </li>
                 </ul>
             )
         }
