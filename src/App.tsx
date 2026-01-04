@@ -21,6 +21,7 @@ const App = () => {
   const { user, loading } = useAuth();
   console.log("Auth state", user, loading);
   if (loading) return <h1>Loading...</h1>;
+  
   return (
     <Routes>
       <Route path='/login'
