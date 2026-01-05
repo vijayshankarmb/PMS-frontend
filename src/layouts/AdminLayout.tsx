@@ -47,10 +47,7 @@ const AdminLayout = () => {
                             <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Settings</DropdownMenuItem>
-                                <DropdownMenuItem>Support</DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                                <DropdownMenuItem onClick={logout} className="text-destructive focus:bg-destructive/10 cursor-pointer">Logout</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
