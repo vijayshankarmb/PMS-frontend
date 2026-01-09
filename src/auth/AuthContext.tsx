@@ -38,8 +38,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const signup = async (name: string, email: string, password: string) => {
         try {
-            const res = await api.post("/auth/signup", { name, email, password });
-             console.log(res);
+            await api.post("/auth/signup", { name, email, password });
+            // console.log(res);
             await login(email, password);
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
@@ -51,8 +51,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = async (email: string, password: string) => {
         try {
-            const res = await api.post("/auth/login", { email, password });
-            console.log(res);
+            await api.post("/auth/login", { email, password });
+            // console.log(res);
             await fetchMe();
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {

@@ -49,7 +49,7 @@ const Sidebar = () => {
 
     const NavContent = ({ onLinkClick }: { onLinkClick?: () => void }) => (
         <div className="flex h-full flex-col gap-2">
-            <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+            <div className="flex h-14 items-center border-b px-4 lg:h-15 lg:px-6">
                 <div className="flex items-center gap-2 font-semibold">
                     <Package2 className="h-6 w-6" />
                     <span className="">Project Manager</span>
@@ -90,7 +90,7 @@ const Sidebar = () => {
                             <span className="sr-only">Toggle navigation menu</span>
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="p-0 bg-background w-[80%] sm:w-[300px]">
+                    <SheetContent side="left" className="p-0 bg-background w-[80%] sm:w-75">
                         <SheetHeader className="sr-only">
                             <SheetTitle>Navigation Menu</SheetTitle>
                         </SheetHeader>
@@ -100,7 +100,7 @@ const Sidebar = () => {
             </div>
 
             {/* Desktop Sidebar */}
-            <aside className="hidden border-r bg-muted/40 md:block w-[280px] min-h-screen">
+            <aside className="hidden border-r bg-muted/40 md:block w-70 min-h-screen">
                 <NavContent />
             </aside>
         </>
